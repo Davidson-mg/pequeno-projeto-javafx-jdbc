@@ -1,8 +1,10 @@
 
 package model.entities;
 
+import java.io.Serializable;
 
-public class Departamento {
+
+public class Departamento implements Serializable {
     
     
 	private Integer id;      
@@ -26,11 +28,11 @@ public class Departamento {
 		this.id = id;
 	}
         
-	public String getName() {
+	public String getNome() {
 		return nome;
 	}
         
-	public void setName(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
