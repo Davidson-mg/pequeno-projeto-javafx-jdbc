@@ -23,7 +23,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     
-    private static Scene mainScene;
+    private static Scene mainScene; /*Estamos criando um referencia externa para a classe Scene. Como ela é privada, vamos precisar de um metodo
+    get para acessa-la fora da classe. Esse metodo foi criado mais abaixo*/
     
     public void start(Stage primaryStage) {  
         try {FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));   
@@ -41,7 +42,7 @@ public class Main extends Application {
         } 
     }
     
-    public static Scene geMainScene() {
+    public static Scene getMainScene() {/*Metodo que acessa a referencia da classe Scene*/ 
 
         return mainScene;
 
@@ -49,6 +50,5 @@ public class Main extends Application {
     
     public static void main(String[] args) {
         launch(args);
-    }
-    
+    }   
 }
