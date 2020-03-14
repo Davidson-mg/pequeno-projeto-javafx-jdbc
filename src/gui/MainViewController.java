@@ -21,6 +21,9 @@ import javafx.scene.layout.VBox;
 import model.entities.Departamento;
 import model.services.ServicoDeDepartamento;
 import workshop.javafx.jdbc.Main;
+import gui.DepartamentoListController;
+import java.util.function.Consumer;
+import javax.sound.midi.ControllerEventListener;
 
 /**
  *
@@ -45,13 +48,19 @@ public class MainViewController implements Initializable{
     
     public void onMenuItemDepartamentoAction(){
     
-        LoadView2("/gui/DepartamentoList.fxml");
+        LoadView("/gui/DepartamentoList.fxml", (DepartamentoListController controler) -> {
+        
+            controler.setServicosDeDepartamento(new ServicoDeDepartamento());
+            controler.updateTableView();
+            
+        });
         
     }
     
+    @FXML
     public void onMenuItemSobreAction(){
     
-        LoadView("/gui/Sobre.fxml");
+        LoadView("/gui/Sobre.fxml", x -> {});
         
     }
     
@@ -60,7 +69,7 @@ public class MainViewController implements Initializable{
   
     }
     
-    public void LoadView (String absoluteNome){ /*Metodo para carregar a tela */
+    public <T> void LoadView(String absoluteNome, Consumer<T> initializingAction){ /*Metodo para carregar a tela. Vai receber uma string e uma expressão lambda como paramentro */
         
         try{
             FXMLLoader load = new FXMLLoader (getClass().getResource(absoluteNome)); /*Instanciando o objeto FXMLLoader e recebendo como parametro os metodos padrões para este caso*/
@@ -83,6 +92,9 @@ public class MainViewController implements Initializable{
             mainVBOx.getChildren().clear(); /*Vai limpar todos os filhos do mainVobox */
             mainVBOx.getChildren().add(mainMenu); /*Vai adicionar os filhos do vbox que foram armazenados na variavel mainMenu acima*/
             mainVBOx.getChildren().addAll(newBox.getChildren());/*Vai adicionar todos os filhos do newBox*/
+            
+            T controler = load.getController();
+            initializingAction.accept(controler);
             
         }
         catch (IOException e){
