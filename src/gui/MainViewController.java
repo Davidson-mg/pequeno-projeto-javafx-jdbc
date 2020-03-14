@@ -54,7 +54,7 @@ public class MainViewController implements Initializable{
     }
     
     @Override
-    public void initialize(URL uri, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) { /*Este metodo somos obrigados a criar quando implementamos o Initializable. OBS: ele é criado a principio fazio*/
   
     }
     
