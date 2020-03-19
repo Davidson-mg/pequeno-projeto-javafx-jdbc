@@ -53,8 +53,7 @@ public class MainViewController implements Initializable{
             controler.setServicosDeDepartamento(new ServicoDeDepartamento());
             controler.updateTableView();
             
-        });
-        
+        });     
     }
     
     @FXML
@@ -103,53 +102,5 @@ public class MainViewController implements Initializable{
             
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public void LoadView2 (String absoluteNome){ /*Metodo para carregar a tela */
-        
-        try{
-            FXMLLoader load = new FXMLLoader (getClass().getResource(absoluteNome)); /*Instanciando o objeto FXMLLoader e recebendo como parametro os metodos padrões para este caso*/
-            VBox newBox = load.load(); /*Objeto do tipo vbox usando o metodo load da classe instanciada acima, FXMLLoader que abre a tela */
-            
-            Scene mainScene = Main.getMainScene(); /*Variavel do tipo Scene que vai acessar a referencia da classe Scene através do metodo get que criamos */
-            
-            /*Nossa tela principal é feita em um ScrollPane (veja no fxml ou no SceneBuilder), e nele temos um vbox.
-            Vamos carregar abaixo a tela "sobre" do menu "ajuda". A nossa intenção abaixo é carregar os filhos da tela "sobre" do menu "ajuda"*/
-            
-            VBox mainVBOx = (VBox)((ScrollPane) mainScene.getRoot()).getContent();
-            /* primeiro usamos um getRoot que vai pegar o primeiro elemento da view que é um ScrollPane. É necessario usar um casting antes do ScrollPane para mostrar quem está pegando um ScrollPane.
-            Dentro do ScrollPane temos um Content (conteudo), devemos acessa-lo com o getContent. O Content já uma referencia para o Vbox.
-            Por ultimo, realizamos um casting do VBox*/
-            
-            /*Quando usuario clicar no menu "ajuda" e depois em "sobre", vai carregar uma nova tela. Ao mudar de tela, o menuBar deve ser preservado
-            Vamos excluir todos os filhos do vbox no ScrollPane, incluir o menuBar e em seguida os filho do menu na tela "sobre"*/
-            
-            Node mainMenu = mainVBOx.getChildren().get(0);/*Variavel do tipo Node que vai receber os filhos do vbox na janela principal "mainView"*/
-            mainVBOx.getChildren().clear(); /*Vai limpar todos os filhos do mainVobox */
-            mainVBOx.getChildren().add(mainMenu); /*Vai adicionar os filhos do vbox que foram armazenados na variavel mainMenu acima*/
-            mainVBOx.getChildren().addAll(newBox.getChildren());/*Vai adicionar todos os filhos do newBox*/
-            
-            DepartamentoListController controler = load.getController(); /*A partir do load instanciado no FXMLLoader acima, podemos carregar a view e 
-            acessar o controler. Ou seja, podemos tb pegar uma referentecia controlle da view DepartamentoListController*/
-            
-            controler.setServicosDeDepartamento(new ServicoDeDepartamento()); /*chamando metodo setServicosDeDepartamento da classe DepartamentoListController para
-            injetar dependencia da classe DepartamentoListController*/
-            
-            controler.updateTableView();
-            
-        }
-        catch (IOException e){
-        
-            Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), Alert.AlertType.ERROR);
-            
-        }
-    }
-    
+   
 }

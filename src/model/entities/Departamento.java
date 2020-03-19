@@ -1,86 +1,73 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package model.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-
+/**
+ *
+ * @author David
+ */
 public class Departamento implements Serializable {
     
+    private Integer id;
+    private String nome;
+
+    public Departamento(){}
     
-	private Integer id;      
-	private String nome;
-        
+    public Departamento(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 
-	public Departamento() {}
-        
-	public Departamento(Integer id, String nome) {
+    public Integer getId() {
+        return id;
+    }
 
-		this.id = id;
-		this.nome = nome;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	}
-        
-	public Integer getId() {
-		return id;
-	}
-        
-	public void setId(Integer id) {
-		this.id = id;
-	}
-        
-	public String getNome() {
-		return nome;
-	}
-        
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	@Override
-	public int hashCode() {
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-        
-	@Override
-	public boolean equals(Object obj) {
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
 
-		if (this == obj)
-		
-                    return true;
-                
-		if (obj == null)
-			
-                    return false;
-
-		if (getClass() != obj.getClass())
-
-                    return false;
-
-		Departamento other = (Departamento) obj;
-
-		if (id == null) {
-
-			if (other.id != null)
-
-				return false;
-
-		} else if (!id.equals(other.id))
-
-			return false;
-
-		return true;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
         }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Departamento other = (Departamento) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-        public String toString() {
-
-		return "Department [id=" + id + ", name=" + nome + "]";
-                
-	}
-}
+    @Override
+    public String toString() {
+        return "Departamento{" + "id=" + id + ", nome=" + nome + '}';
+    } 
     
-
+}
