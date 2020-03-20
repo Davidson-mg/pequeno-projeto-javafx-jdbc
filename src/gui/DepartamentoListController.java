@@ -5,17 +5,26 @@
  */
 package gui;
 
+import gui.util.Alerts;
+import gui.util.Utils;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Departamento;
 import model.services.ServicoDeDepartamento;
@@ -47,9 +56,10 @@ public class DepartamentoListController implements Initializable{
     "updateTableView" criado mais abaixo, e em seguida será associado a tableview para aperecer na tabela do app*/
     
     @FXML
-    public void onBtNewAction (){
-    
-        System.out.println("coleeeee");
+    public void onBtNewAction (ActionEvent evento){ /*Quando clicar no btn "novo", vamos chamar o metodo criandoDialogoForm que executa */
+        
+        Stage parenteStage = Utils.palcoAtual(evento);
+        criandoDialogoForm("/gui/DepartamentoForm.fxml", parenteStage);
     
     }
     
@@ -100,6 +110,28 @@ public class DepartamentoListController implements Initializable{
         
         tableViewDepartamento.setItems(obsList); /*Vai carregar os instens na tableview e mostrar na tela*/
         
+    }
+    
+    private void criandoDialogoForm (String absoluteNome, Stage parentStage){ /*Função para abrir um nova jenela afim de preencher um novo departamento*/
+    
+        try{
+            FXMLLoader load = new FXMLLoader (getClass().getResource(absoluteNome)); /*Instanciando o objeto FXMLLoader e recebendo como parametro os metodos padrões para este caso*/
+            Pane pane = load.load();
+            
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Informe os dados do depatamento"); /*titulo que da nova janela*/
+            dialogStage.setScene(new Scene(pane)); /*Vai criar uma nova scena, nova janela*/
+            dialogStage.setResizable(false); /*Diz que a janela pode ou não ser redimensionada. Neste caso não*/
+            dialogStage.initOwner(parentStage); /*Vai entrar o parentStage que é o pai desse janela*/
+            dialogStage.initModality(Modality.WINDOW_MODAL); /*Enquanto vc não fechar a janela vc não pode acessar a janela anterior*/
+            dialogStage.showAndWait();
+        }
+        catch(IOException e){
+        
+            Alerts.showAlert("IOException", "Erro ao carregar a view", e.getMessage(), Alert.AlertType.ERROR);
+        
+        }
+    
     }
     
 }
