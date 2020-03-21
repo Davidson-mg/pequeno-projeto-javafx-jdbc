@@ -3,8 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/model/dao/DaoFabrica.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/gui/util/Constraints.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/model/dao/impl/DepartamentoDaoJDBC.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/model/dao/VendedorDao.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/model/dao/DepartamentoDao.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/db/DbException.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/model/services/ServicoDeDepartamento.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/gui/util/Utils.java</file>
             <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/gui/DepartamentoFormController.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/db/DB.java</file>
             <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/gui/DepartamentoListController.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/gui/util/Alerts.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/gui/MainViewController.java</file>
+            <file>file:/C:/Users/David/Documents/NetBeansProjects/workshop-javafx-jdbc/src/model/dao/impl/VendedorDaoJDBC.java</file>
         </group>
     </open-files>
 </project-private>

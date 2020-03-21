@@ -5,15 +5,21 @@
  */
 package gui;
 
+import db.DbException;
+import gui.util.Alerts;
 import gui.util.Constraints;
+import gui.util.Utils;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Departamento;
+import model.services.ServicoDeDepartamento;
 
 /**
  *
@@ -22,6 +28,8 @@ import model.entities.Departamento;
 public class DepartamentoFormController implements Initializable {
 
     private Departamento entidades;
+    
+    private ServicoDeDepartamento servico;
     
     @FXML
     private TextField txtId;
@@ -44,10 +52,37 @@ public class DepartamentoFormController implements Initializable {
     
     }
     
-    @FXML
-    public void onBtSalvarAction(){
+    public void setServicoDeDepartamento (ServicoDeDepartamento servico){
     
-        System.out.println("Botão de Salvar");
+        this.servico = servico;
+    
+    }
+    
+    @FXML
+    public void onBtSalvarAction(ActionEvent evento){
+        if (entidades == null){
+        
+            throw new IllegalStateException("Entidade estava nulo");
+        
+        }
+        if(servico == null){
+        
+            throw new IllegalStateException("Serviço estava nulo");
+        
+        }
+        try{
+        
+            entidades = getFormeData();
+            servico.salvarOuAtualizar(entidades);
+            Utils.palcoAtual(evento).close();
+        
+        }
+        catch(DbException e){
+        
+            Alerts.showAlert("Erro ao salvar o objeto", null, e.getMessage(), Alert.AlertType.ERROR);
+        
+        }
+        
     
     }
     
@@ -79,6 +114,17 @@ public class DepartamentoFormController implements Initializable {
         }
         txtId.setText(String.valueOf(entidades.getId())); /*a caixa de texto trabalha só com string. Estamos convertendo o inteiro do id pra string */
         txtId.setText(entidades.getNome());
+    }
+
+    private Departamento getFormeData() {
+        
+        Departamento obj = new Departamento();
+        
+        obj.setId(Utils.tryParsetToInt(txtId.getText()));
+        obj.setNome(txtNome.getText());
+        
+        return obj;
+        
     }
     
 }

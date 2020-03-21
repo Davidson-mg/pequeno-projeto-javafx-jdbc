@@ -25,4 +25,19 @@ public class ServicoDeDepartamento {
     
     }
     
+    public void salvarOuAtualizar (Departamento obj){ /*Vai veriricar se devemos inserir um departamento no banco ou atualizar um existente*/
+    
+        if(obj.getId() == null){
+        
+            dao.insert(obj);
+        
+        }
+        else {
+        
+            dao.update(obj);
+        
+        }
+    
+    }
+    
 }
