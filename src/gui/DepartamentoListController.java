@@ -59,7 +59,8 @@ public class DepartamentoListController implements Initializable{
     public void onBtNewAction (ActionEvent evento){ /*Quando clicar no btn "novo", vamos chamar o metodo criandoDialogoForm que executa */
         
         Stage parenteStage = Utils.palcoAtual(evento);
-        criandoDialogoForm("/gui/DepartamentoForm.fxml", parenteStage);
+        Departamento obj = new Departamento();
+        criandoDialogoForm(obj, "/gui/DepartamentoForm.fxml", parenteStage);
     
     }
     
@@ -112,11 +113,15 @@ public class DepartamentoListController implements Initializable{
         
     }
     
-    private void criandoDialogoForm (String absoluteNome, Stage parentStage){ /*Função para abrir um nova jenela afim de preencher um novo departamento*/
+    private void criandoDialogoForm (Departamento obj, String absoluteNome, Stage parentStage){ /*Função para abrir um nova jenela afim de preencher um novo departamento*/
     
         try{
             FXMLLoader load = new FXMLLoader (getClass().getResource(absoluteNome)); /*Instanciando o objeto FXMLLoader e recebendo como parametro os metodos padrões para este caso*/
             Pane pane = load.load();
+            
+            DepartamentoFormController  controler = load.getController();
+            controler.setDepartamento(obj);
+            controler.updateFormData();
             
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Informe os dados do depatamento"); /*titulo que da nova janela*/
