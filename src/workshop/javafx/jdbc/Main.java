@@ -27,7 +27,8 @@ public class Main extends Application {
     get para acessa-la fora da classe. Esse metodo foi criado mais abaixo*/
     
     public void start(Stage primaryStage) {  
-        try {FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));   
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));   
             ScrollPane scrollPane = loader.load();
 
             scrollPane.setFitToHeight(true);
@@ -36,7 +37,9 @@ public class Main extends Application {
             mainScene = new Scene(scrollPane);   
             primaryStage.setScene(mainScene);   
             primaryStage.setTitle("Sample JavaFX application");   
-            primaryStage.show();  } 
+            primaryStage.show();  
+        
+        } 
         catch (IOException e) {   
             e.printStackTrace();  
         } 

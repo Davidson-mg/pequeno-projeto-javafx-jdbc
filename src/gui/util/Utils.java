@@ -15,10 +15,12 @@ import javafx.stage.Stage;
  */
 public class Utils {
     
-    public static Stage palcoAtual (ActionEvent evento){
+    public static Stage palcoAtual (ActionEvent evento){ /*ActionEvent é o evento que o btn recebu. Vai retornar o palco atual*/
     
         return (Stage) ((Node) evento.getSource()).getScene().getWindow();
-    
+        /*getSource é do tipo objeto (generico) mas queremos ele do tipo Node, por isso usamos o casting de node. A partir daí estamos pegando
+        a cena com o getScene e depois a janela com getWindow. O getWindow é uma superclasse do Stage e por isso precisamos converter para Stage
+        usando o Casting*/
     }
     
     public static Integer tryParsetToInt (String str){

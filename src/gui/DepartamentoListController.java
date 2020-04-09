@@ -5,6 +5,7 @@
  */
 package gui;
 
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Utils;
 import java.io.IOException;
@@ -34,16 +35,16 @@ import workshop.javafx.jdbc.Main;
  *
  * @author David
  */
-public class DepartamentoListController implements Initializable{
+public class DepartamentoListController implements Initializable, DataChangeListener{
     
     private ServicoDeDepartamento servico; /*Declarando uma dependencia da classe serviçoDeDepartamento. Não estamos utilizando o " = new Departamento ();"
     pois seria um acoplamento forte. Ao inves disso, vamos usar mais abaixo o metodo setServicosDeDepartamento para injetar dependencia*/
     
     @FXML
-    private TableView<Departamento> tableViewDepartamento;
+    private TableView<Departamento> tableViewDepartamento; /*Variavel correspondete a tabela*/ 
     
     @FXML
-    private TableColumn<Departamento, Integer> tableColumnId;
+    private TableColumn<Departamento, Integer> tableColumnId; /*variavel correspondente a coluna da tabela*/
     
     @FXML
     private TableColumn<Departamento, String> tableColumnNome;
@@ -57,10 +58,13 @@ public class DepartamentoListController implements Initializable{
     
     @FXML
     public void onBtNewAction (ActionEvent evento){ /*Quando clicar no btn "novo", vamos chamar o metodo criandoDialogoForm que executa */
+    /*É necessario passar o ActionEvent como parametro que vai ser um referencia do controle que recebeu o envento. Esse evento foi criado lá na 
+    classe utils no metodo palcoAtual do tipo Stage. Abaxio vamos criar uma variavel parenteStage dot Stage que vai armazenar o palco atual que 
+    pegamos lá no metodo "palcoAtual" da classe "utils" */    
         
-        Stage parenteStage = Utils.palcoAtual(evento);
-        Departamento obj = new Departamento();
-        criandoDialogoForm(obj, "/gui/DepartamentoForm.fxml", parenteStage);
+    Stage parenteStage = Utils.palcoAtual(evento); /*Variavel parenteStage do tipo parenteStage que vai armazenar meu palco atual*/
+     Departamento obj = new Departamento();
+        criandoDialogoForm(obj, "/gui/DepartamentoForm.fxml", parenteStage); /*parenteStage é o meu palco atual */
     
     }
     
@@ -114,7 +118,7 @@ public class DepartamentoListController implements Initializable{
     }
     
     private void criandoDialogoForm (Departamento obj, String absoluteNome, Stage parentStage){ /*Função para abrir um nova jenela afim de preencher um novo departamento*/
-    
+    /*é necessario passar o Stage (palco) da tela que vai chamar a nova tela, nesse caso uma tela de formulario*/
         try{
             FXMLLoader load = new FXMLLoader (getClass().getResource(absoluteNome)); /*Instanciando o objeto FXMLLoader e recebendo como parametro os metodos padrões para este caso*/
             Pane pane = load.load();
@@ -123,8 +127,9 @@ public class DepartamentoListController implements Initializable{
             controler.setDepartamento(obj);
             controler.setServicoDeDepartamento(new ServicoDeDepartamento());
             controler.updateFormData();
+            controler.subscribeDataChangeListener(this); /*Atualizando a tela*/
             
-            Stage dialogStage = new Stage();
+            Stage dialogStage = new Stage(); /*Quando eu crio uma nova janela na frente da outra, eu preciso criar um novo stage (palco). Vai ser um pauco na frente do outro*/
             dialogStage.setTitle("Informe os dados do depatamento"); /*titulo que da nova janela*/
             dialogStage.setScene(new Scene(pane)); /*Vai criar uma nova scena, nova janela*/
             dialogStage.setResizable(false); /*Diz que a janela pode ou não ser redimensionada. Neste caso não*/
@@ -138,6 +143,11 @@ public class DepartamentoListController implements Initializable{
         
         }
     
+    }
+
+    @Override
+    public void onDataChanged() { /*atualizando a tela*/
+        updateTableView();
     }
     
 }

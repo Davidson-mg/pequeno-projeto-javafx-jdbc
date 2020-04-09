@@ -92,6 +92,11 @@ public class MainViewController implements Initializable{
             mainVBOx.getChildren().add(mainMenu); /*Vai adicionar os filhos do vbox que foram armazenados na variavel mainMenu acima*/
             mainVBOx.getChildren().addAll(newBox.getChildren());/*Vai adicionar todos os filhos do newBox*/
             
+            /*Este codigo abaixao é faria exatamente o que está sendo feito no metodo acima onMenuItemAluno s[o que estamos passando em forma de expressão lambida*/
+            /*AlunoListController controller = loader.getController(); 
+            controller.setServico(new AlunoServico());
+            controller.updateTableView();*/
+            
             T controler = load.getController();
             initializingAction.accept(controler);
             
