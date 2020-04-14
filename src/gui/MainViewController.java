@@ -24,6 +24,7 @@ import workshop.javafx.jdbc.Main;
 import gui.DepartamentoListController;
 import java.util.function.Consumer;
 import javax.sound.midi.ControllerEventListener;
+import model.services.ServicoVendedor;
 
 /**
  *
@@ -40,13 +41,17 @@ public class MainViewController implements Initializable{
     @FXML
     private MenuItem menuItemSobre;
     
-    public void onMenuItemVendedorAction(){
+    public void onMenuItemVendedorAction(){ //Vai abrir a tela de vendedor quando clicar neste btn
     
-        System.out.println("onMenuItemVendedorAction");
+        LoadView("/gui/VendedorList.fxml", (VendedorListController controler) -> {
         
+            controler.setServicoVendedor(new ServicoVendedor());
+            controler.updateTableView();
+            
+        });       
     }
     
-    public void onMenuItemDepartamentoAction(){
+    public void onMenuItemDepartamentoAction(){ //Vai abrir a tela de Departamento quando clicar neste btn
     
         LoadView("/gui/DepartamentoList.fxml", (DepartamentoListController controler) -> {
         
