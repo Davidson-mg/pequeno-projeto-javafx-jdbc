@@ -11,10 +11,7 @@ import model.dao.DaoFabrica;
 import model.dao.DepartamentoDao;
 import model.entities.Departamento;
 
-/**
- *
- * @author David
- */
+
 public class ServicoDeDepartamento {
     
     private DepartamentoDao dao = DaoFabrica.createDepartamentoDao(); /*Instanciando a interface DaoFabrica que retorna algum metodo da classe DepartamentoDaoJDBC que por sua vez

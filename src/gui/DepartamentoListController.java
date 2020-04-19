@@ -92,7 +92,7 @@ public class DepartamentoListController implements Initializable, DataChangeList
     @Override
     public void initialize(URL url, ResourceBundle rb) { /*Este metodo somos obrigados a criar quando implementamos o Initializable. OBS: ele é criado a principio fazio*/
         
-        initializebleNodes(); /*Chmando o metodo abaixo initializebleNodes*/
+        initializebleNodes(); /*Chamando o metodo abaixo initializebleNodes*/
         
     }
 
@@ -152,7 +152,8 @@ public class DepartamentoListController implements Initializable, DataChangeList
             dialogStage.showAndWait();
         }
         catch(IOException e){
-        
+        	
+        	e.printStackTrace();
             Alerts.showAlert("IOException", "Erro ao carregar a view", e.getMessage(), Alert.AlertType.ERROR);
         
         }

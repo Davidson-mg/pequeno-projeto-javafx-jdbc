@@ -23,17 +23,17 @@
           <RowConstraints maxHeight="28.0" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Nome" />
-            <Label text="Id" GridPane.rowIndex="1" />
             <TextField fx:id="txtNome" GridPane.columnIndex="1" />
             <TextField fx:id="txtId" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="labelErrorNome" prefHeight="17.0" prefWidth="210.0" textFill="#eb0101" GridPane.columnIndex="2" />
             <HBox prefHeight="100.0" prefWidth="169.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
                   <Button fx:id="btSalvar" mnemonicParsing="false" onAction="#onBtSalvarAction" text="Salvar" />
                   <Button fx:id="btCancelar" mnemonicParsing="false" onAction="#onBtCancelarAction" text="Cancelar" />
                </children>
             </HBox>
+            <Label text="Nome" />
+            <Label text="Id" GridPane.rowIndex="1" />
+            <Label fx:id="labelErrorNome" prefHeight="17.0" prefWidth="210.0" textFill="#eb0101" GridPane.columnIndex="2" />
          </children>
       </GridPane>
    </children>

@@ -297,7 +297,8 @@ public class VendedorDaoJDBC implements VendedorDao{
         obj.setId(rs.getInt("id"));
         obj.setNome(rs.getString("nome"));
         obj.setEmail(rs.getString("email"));
-        obj.setDataNascimento(rs.getDate("dataNascimento"));
+        //obj.setDataNascimento(rs.getDate("dataNascimento"));/*Quando inserimos o DatePicker na tela de formulario é necessario trocar essa linha pela de baixo*/
+        obj.setDataNascimento(new java.util.Date(rs.getTimestamp("dataNascimento").getTime()));
         obj.setSalarioBase(rs.getDouble("salarioBase"));
                     
         obj.setDepartamento(dep); /*Estamos associando o objeto vendedor com o departamento. Vale lembrar que essa associação não é feita pelo id

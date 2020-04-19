@@ -44,7 +44,8 @@ import workshop.javafx.jdbc.Main;
  * @author David
  */
 public class VendedorListController implements Initializable, DataChangeListener {
- private ServicoVendedor servico; /*Declarando uma dependencia da classe serviçoDeDepartamento. Não estamos utilizando o " = new Departamento ();"
+ 
+	private ServicoVendedor servico; /*Declarando uma dependencia da classe serviçoDeDepartamento. Não estamos utilizando o " = new Departamento ();"
     pois seria um acoplamento forte. Ao inves disso, vamos usar mais abaixo o metodo setServicosDeDepartamento para injetar dependencia*/
     
     @FXML
@@ -116,6 +117,7 @@ public class VendedorListController implements Initializable, DataChangeListener
         gui.utils resposavel por formatar a data. Passando como parametro a variavel que armazena a data e o formato que eu quero*/
         tableColumnSalarioBase.setCellValueFactory(new PropertyValueFactory<>("salarioBase"));/*Chamando o metodo formatTableColumnDate na classe Utils do pacote
         gui.utils resposavel formatar numeros do tipo double. Passando como parametro a variavel que armazena o numero e o numero de casas decimais*/
+        Utils.formatTableColumnDouble(tableColumnSalarioBase, 2); /*Chamando o metodo formatTableColumnDouble da classe Utils que formata o valor do salario com duas casas decimais*/
         
         /*Aqui vamos fazer com que a tabela preencha toda tela do app */
         Stage stage = (Stage) Main.getMainScene().getWindow();/*Pegando uma referente para o stage. Com o getMainScene acessamos a cena e com o getWindow dizemos que essa
@@ -156,12 +158,13 @@ public class VendedorListController implements Initializable, DataChangeListener
             
             VendedorFormController  controler = load.getController();
             controler.setVendedor(obj);
-            controler.setServicoVendedor(new ServicoVendedor());
+            controler.setServicos(new ServicoVendedor(), new ServicoDeDepartamento());
+            controler.carregarObjetosAssociados();
             controler.updateFormData();
             controler.subscribeDataChangeListener(this); /*Atualizando a tela*/
             
             Stage dialogStage = new Stage(); /*Quando eu crio uma nova janela na frente da outra, eu preciso criar um novo stage (palco). Vai ser um pauco na frente do outro*/
-            dialogStage.setTitle("Informe os dados do depatamento"); /*titulo que da nova janela*/
+            dialogStage.setTitle("Informe os dados do vendedor"); /*titulo que da nova janela*/
             dialogStage.setScene(new Scene(pane)); /*Vai criar uma nova scena, nova janela*/
             dialogStage.setResizable(false); /*Diz que a janela pode ou não ser redimensionada. Neste caso não*/
             dialogStage.initOwner(parentStage); /*Vai entrar o parentStage que é o pai desse janela*/
@@ -169,7 +172,8 @@ public class VendedorListController implements Initializable, DataChangeListener
             dialogStage.showAndWait();
         }
         catch(IOException e){
-        
+        	
+        	e.printStackTrace();
             Alerts.showAlert("IOException", "Erro ao carregar a view", e.getMessage(), Alert.AlertType.ERROR);
         
         }
@@ -201,7 +205,7 @@ public class VendedorListController implements Initializable, DataChangeListener
             setGraphic(button);    
             button.setOnAction(    
                     event -> criandoDialogoForm(     
-                            obj, "/gui/DepartamentoForm.fxml",Utils.palcoAtual(event)));   
+                            obj, "/gui/VendedorForm.fxml",Utils.palcoAtual(event)));   
         }  
         
         }); 

@@ -6,13 +6,17 @@
 package gui.util;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 /**
  *
@@ -28,8 +32,9 @@ public class Utils {
         usando o Casting*/
     }
     
-    public static Integer tryParsetToInt (String str){
     
+    public static Integer tryParseToInt (String str){ /*Este metodo converte de string para int. Vamos usa-lo nos campos txt que vão receber valores inteiros, pois txt só aceita string*/
+        
         try{
             
             return Integer.parseInt(str);
@@ -40,21 +45,38 @@ public class Utils {
             return null;
             
         }
-        
-        
+              
     }
+
+
+
+
+	public static Double tryParseToDouble(String str) { /*Este metodo converte de string para Double. Vamos usa-lo nos campos txt que vão receber valores Double, pois txt só aceita string*/
+        try{
+            
+            return Double.parseDouble(str);
+            
+        }
+        catch(NumberFormatException e){
+        
+            return null;
+            
+        }
+	}
+   
     
-    public static <T> void formatTableColumnDate(
-        TableColumn<T, Date> tableColumn, String format) {  
+    public static <T> void formatTableColumnDate(TableColumn<T, Date> tableColumn, String format) { /*Este metodo formata a data na coluna
+        correpondente a tabela de dados recebendo o formato como parametro e variavel que aramena o valor*/  
             
-            tableColumn.setCellFactory(column -> {   
+        tableColumn.setCellFactory(column -> {   
             
-                TableCell<T, Date> cell = new TableCell<T, Date>() {    
-                    private SimpleDateFormat sdf = new SimpleDateFormat(format); 
+            TableCell<T, Date> cell = new TableCell<T, Date>() {    
+                private SimpleDateFormat sdf = new SimpleDateFormat(format); 
  
-        @Override    
-        protected void updateItem(Date item, boolean empty) {     
-            super.updateItem(item, empty);     
+            @Override    
+            protected void updateItem(Date item, boolean empty) {     
+                
+                super.updateItem(item, empty);     
                 if (empty) {      
                     setText(null);     
                 } 
@@ -70,7 +92,8 @@ public class Utils {
         }
     
     
-    public static <T> void formatTableColumnDouble(TableColumn<T, Double> tableColumn, int decimalPlaces) {  
+    public static <T> void formatTableColumnDouble(TableColumn<T, Double> tableColumn, int decimalPlaces) { /*Este metodo formata numeros com ponto
+        flutuante para tenham duas casas decimais na coluna corresponte na tabela de dados*/  
         
         tableColumn.setCellFactory(column -> {   
             
@@ -91,8 +114,37 @@ public class Utils {
                 }   
             }; 
  
-                return cell;
-                
-            }); 
+            return cell;
+            
+        }); 
+    } 
+
+    public static void formatDatePicker(DatePicker datePicker, String format) { /*Este metodo formata a data no DatePicker do formulario*/ 
+        datePicker.setConverter(new StringConverter<LocalDate>() {      
+            
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(format); {    
+                datePicker.setPromptText(format.toLowerCase());   
+            } 
+ 
+        @Override   
+        public String toString(LocalDate date) {    
+            if (date != null) {     
+                return dateFormatter.format(date);    
+            } else {     
+                return "";    
+            }   
         } 
-    }
+
+        @Override   
+        public 
+              LocalDate fromString(String string) {    
+                  if (string != null && !string.isEmpty()) {     
+                      return LocalDate.parse(string, dateFormatter);    
+                  } else {     
+                      return null;    
+                  }   
+              }  
+        }); 
+    }  
+
+}

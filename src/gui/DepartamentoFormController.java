@@ -132,7 +132,8 @@ public class DepartamentoFormController implements Initializable {
         Constraints.setTextFieldMaxLength(txtNome, 30);
     }
     
-    public void updateFormData (){ /*Esse metodo relacioa os campos do formulario com os atributos da classe Aluno*/
+    public void updateFormData (){ /*Esse metodo joga nas caixinhas os dados dos atributos correspondentes da classe Departamento. Ao contraio
+        do metodo abaixo getFormeData que pega os valores da caixinha e joga na classe departamento*/
     
         if (entidades == null) {
     
@@ -146,14 +147,14 @@ public class DepartamentoFormController implements Initializable {
         txtNome.setText(entidades.getNome());
     }
 
-    private Departamento getFormeData() { 
+    private Departamento getFormeData() { /*Esse metodo pega os dados que estão nas caixinhas do formulario e instancia um deparamento*/
         
         Departamento obj = new Departamento();
         
         ValidationException exception = new ValidationException ("Validando erro"); /*instanciando nossa exceção personalizada
         que trata possiveis erros ao inserir dados dos campos dos formularios*/
         
-        obj.setId(Utils.tryParsetToInt(txtId.getText())); /*Não vamos verificar nenhum erro no campo de id pq o campo dele
+        obj.setId(Utils.tryParseToInt(txtId.getText())); /*Não vamos verificar nenhum erro no campo de id pq o campo dele
         está programado pra não ser possivel digitar nada e pessar valor vazio*/
         
         if(txtNome.getText() == null || txtNome.getText().trim().equals("")){ /*Vamos verificar se o campo de nome está vazio.

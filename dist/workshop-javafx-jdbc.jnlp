@@ -9,7 +9,7 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="lib\mysql-connector-java-5.1.48.jar" size="1006956" download="eager" />
-    <jar href="workshop-javafx-jdbc.jar" size="46976" download="eager" />
+    <jar href="workshop-javafx-jdbc.jar" size="49061" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="workshop.javafx.jdbc.Main"  name="workshop-javafx-jdbc" />
   <update check="always"/>
